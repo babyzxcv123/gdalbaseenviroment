@@ -12,12 +12,19 @@ namespace gdal
         public void Clip()
         {
             //规则裁剪  
-            string srcFileName = @"D:\temp\test\17.tif";
-            string dstFileName = @"D:\测试\测试17-1.tif";
+            string srcFileName = @"D:\temp\1.tif";
+            string dstFileName = @"D:\temp\测试17-1.tif";
 
             if (File.Exists(dstFileName))
                 File.Delete(dstFileName);
+            if (!File.Exists(srcFileName))
+            {
+                Console.WriteLine("File " + srcFileName + " not found");
+                Console.ReadKey();
 
+            }
+            if (!File.Exists(srcFileName))
+                return;
 
             Dataset srcDs = Gdal.Open(srcFileName, Access.GA_ReadOnly);
             DataType srcType = srcDs.GetRasterBand(1).DataType;

@@ -1,10 +1,6 @@
 ﻿using OSGeo.GDAL;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace gdal
 {
@@ -18,17 +14,14 @@ namespace gdal
             tilesBounds.minRow = 53340;
             tilesBounds.maxRow = 53355;
             tilesBounds.zoomLevel = 17;
-
             GdalConfiguration.ConfigureGdal();
-
             GdalConfiguration.ConfigureOgr();
+            var osOperator = new OSOperator();
+            osOperator.OpenFeatureClass("V_BOUA5");
             var clip = new RasterClip();
             clip.Clip();
             Console.ReadKey();
-            //string outPutFileName = @"D:\temp\test\" + tilesBounds.zoomLevel.ToString() + ".tif";
-            //string tilePath = @"D:\temp\test\";
-            //TilesCombine combine = new TilesCombine();
-            //combine.CombineTiles(tilesBounds, tilePath, outPutFileName);
+            
         }
     }
 
