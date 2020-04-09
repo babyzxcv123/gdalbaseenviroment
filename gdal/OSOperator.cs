@@ -13,6 +13,7 @@ namespace gdal
     /// </summary>
     class OSOperator
     {
+
         public void OpenFeatureClass(string layername)
         {
             Feature pFeature;
@@ -30,8 +31,8 @@ namespace gdal
             //const char* uri = "/home/hawk/data/gis/beijing/beijing_Pt.shp";
             //const char* uri  = "PG:dbname='GBSDE' host='127.0.0.1' port='5432' user='GBSDE' password='GBSDE'";
             #region oracle
-            //string path = "OCI:tlmh/tlmh@10.1.4.92:1521/orcl";            
-            //var driver=Ogr.GetDriverByName("OCI");
+             path = "OCI:tlmh/tlmh@10.1.4.92:1521/orcl";            
+             driver=Ogr.GetDriverByName("OCI");
 
 
 
@@ -41,13 +42,26 @@ namespace gdal
             //    Console.ReadKey();
             //    Environment.Exit(-1);
             //}
-           
+
             #endregion
-            DataSource pDataSource = driver.Open(path, 0);
+            DataSource pDataSource=null;
+            try
+            {
+                pDataSource = driver.Open(path, 0);
+            }
+            catch (Exception ex)
+            {
+            }
+            Console.WriteLine(pDataSource.GetLayerCount());
+
+
             for (int i = 0; i < pDataSource.GetLayerCount(); i++)
             {
                 Console.WriteLine(pDataSource.GetLayerByIndex(i).GetName());
             }
+            driver.Dispose();
+            driver = Ogr.GetDriverByName("SDE");
+
             Layer pLayer = pDataSource.GetLayerByName(layername);
             if(pLayer==null)
             {
