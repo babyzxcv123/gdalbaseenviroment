@@ -82,7 +82,8 @@ namespace gdal
             }
 #endif
             // 解决Shp文件中文路径乱码，无法读取的问题（有时去掉却可以识别中文，待解决）
-            Gdal.SetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");
+            // 设置Shp字段、属性等的编码为空
+            Gdal.SetConfigOption("SHAPE_ENCODING", "UTF-8"); 
             _configuredOgr = true;
         }
 
@@ -96,11 +97,11 @@ namespace gdal
 
             // Register drivers
             Gdal.AllRegister();
-            // 设置Shp字段、属性等的编码为空
-            Gdal.SetConfigOption("SHAPE_ENCODING", "UTF-8");
+
+            Gdal.SetConfigOption("GDAL_FILENAME_IS_UTF8", "YES");
 
             // 解决Shp文件中文路径乱码，无法读取的问题（有时去掉却可以识别中文，待解决）
-           /// Gdal.SetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");
+            /// Gdal.SetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");
             _configuredGdal = true;
         }
     }

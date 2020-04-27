@@ -37,6 +37,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <ProjectGuid>{E1B80B81-64FF-4308-B7AA-B23251D7FD2E}</ProjectGuid>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="gdalconst_csharp, Version=1.0.7372.35157, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -63,13 +66,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ReadProjInfo.cs" />
     <Compile Include="Clip.cs" />
     <Compile Include="GdalConfiguration.cs" />
     <Compile Include="OSOperator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

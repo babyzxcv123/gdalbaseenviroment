@@ -8,18 +8,29 @@ namespace gdal
     {
         static void Main(string[] args)
         {//调用
-            TilesBounds tilesBounds = new TilesBounds();
-            tilesBounds.minCol = 109196;
-            tilesBounds.maxCol = 109217;
-            tilesBounds.minRow = 53340;
-            tilesBounds.maxRow = 53355;
-            tilesBounds.zoomLevel = 17;
+            //TilesBounds tilesBounds = new TilesBounds();
+            //tilesBounds.minCol = 109196;
+            //tilesBounds.maxCol = 109217;
+            //tilesBounds.minRow = 53340;
+            //tilesBounds.maxRow = 53355;
+            //tilesBounds.zoomLevel = 17;
             GdalConfiguration.ConfigureGdal();
             GdalConfiguration.ConfigureOgr();
-            var osOperator = new OSOperator();
-            osOperator.OpenFeatureClass("V_BOUA5");
-            var clip = new RasterClip();
-            clip.Clip();
+            Console.WriteLine("输入检查目录");
+            var dir = Console.ReadLine();
+            while(string.IsNullOrEmpty(dir)||!Directory.Exists(dir))
+            {
+                Console.WriteLine("输入信息有误，请重新输入");
+                dir = Console.ReadLine();
+            }
+
+            var readprojinfos = new ReadProjInfo();
+            readprojinfos.Read(dir, Path.GetPathRoot(dir));
+            Console.WriteLine($"检查完毕!,结果目录为：【{Path.Combine(Path.GetPathRoot(dir),"3.txt")}】和【{Path.Combine(Path.GetPathRoot(dir), "6.txt")}】");
+            //var osOperator = new OSOperator();
+            //osOperator.OpenFeatureClass("V_BOUA5");
+            //var clip = new RasterClip();
+            //clip.Clip();
             Console.ReadKey();
             
         }
