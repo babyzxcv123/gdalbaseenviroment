@@ -20,13 +20,25 @@ namespace gdal
             var dir = Console.ReadLine();
             while(string.IsNullOrEmpty(dir)||!Directory.Exists(dir))
             {
-                Console.WriteLine("输入信息有误，请重新输入");
+                Console.WriteLine("输入信息有误，请重新输入,输入Q或q退出程序");
                 dir = Console.ReadLine();
+                if (dir == "q" || dir == "Q" || dir == "quit" || dir == "QUIT")
+                    Environment.Exit(0);
             }
-
+            Console.WriteLine("输入结果保存路径");
+            var savepath = Console.ReadLine();
+            while(string.IsNullOrEmpty(savepath))
+            {
+                Console.WriteLine("输入信息有误，请重新输入,输入Q或q退出程序");
+                savepath = Console.ReadLine();
+            }
+            if(!Directory.Exists(savepath))
+            {
+                Directory.CreateDirectory(savepath);
+            }
             var readprojinfos = new ReadProjInfo();
-            readprojinfos.Read(dir, Path.GetPathRoot(dir));
-            Console.WriteLine($"检查完毕!,结果目录为：【{Path.Combine(Path.GetPathRoot(dir),"3.txt")}】和【{Path.Combine(Path.GetPathRoot(dir), "6.txt")}】");
+            readprojinfos.Read(dir, Path.Combine(savepath, "三度带影像文件列表.txt"),Path.Combine(savepath, "六度带影像文件列表.txt"));
+            Console.WriteLine($"检查完毕!,结果目录为：【{Path.Combine(savepath, "三度带影像文件列表.txt")}】和【{Path.Combine(savepath, "六度带影像文件列表.txt")}】");
             //var osOperator = new OSOperator();
             //osOperator.OpenFeatureClass("V_BOUA5");
             //var clip = new RasterClip();

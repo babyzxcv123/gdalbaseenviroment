@@ -4,7 +4,7 @@ using System.IO;
 
 namespace gdal
 {
-    class ReadProjInfo
+    class ModifyField
     {
         private List<string> trdPaths = new List<string>();
         private List<string> sixPaths = new List<string>();
